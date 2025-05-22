@@ -1,0 +1,44 @@
+{
+  "apps": [
+    {
+      "name": "emojifold-batch",
+      "script": "emojifold",
+      "args": "batch",
+      "cwd": "/Users/rob/repos/emojifold",
+      "interpreter": "/Users/rob/repos/emojifold/.venv/bin/python",
+      "instances": 1,
+      "exec_mode": "fork",
+      "watch": false,
+      "max_memory_restart": "4G",
+      "env": {
+        "PYTHONPATH": "/Users/rob/repos/emojifold",
+        "HF_HOME": "~/.cache/huggingface",
+        "DEVICE": "mps"
+      },
+      "log_file": "./logs/emojifold-batch.log",
+      "out_file": "./logs/emojifold-batch-out.log",
+      "error_file": "./logs/emojifold-batch-error.log",
+      "time": true,
+      "autorestart": false,
+      "max_restarts": 3,
+      "min_uptime": "10s"
+    },
+    {
+      "name": "emojifold-test",
+      "script": "emojifold", 
+      "args": "batch --test",
+      "cwd": "/Users/rob/repos/emojifold",
+      "interpreter": "/Users/rob/repos/emojifold/.venv/bin/python",
+      "instances": 1,
+      "exec_mode": "fork",
+      "watch": false,
+      "autorestart": false,
+      "env": {
+        "PYTHONPATH": "/Users/rob/repos/emojifold",
+        "HF_HOME": "~/.cache/huggingface",
+        "DEVICE": "mps"
+      },
+      "log_file": "./logs/emojifold-test.log"
+    }
+  ]
+}

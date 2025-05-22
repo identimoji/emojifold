@@ -1,0 +1,29 @@
+{
+  "apps": [
+    {
+      "name": "emojifold-manifold-discovery",
+      "script": "python",
+      "args": "emojifold/batch_v3.py",
+      "cwd": "/Users/rob/repos/emojifold",
+      "instances": 1,
+      "exec_mode": "fork",
+      "watch": false,
+      "max_memory_restart": "8G",
+      "env": {
+        "PYTHONPATH": "/Users/rob/repos/emojifold",
+        "HF_HOME": "/Users/rob/.cache/huggingface",
+        "DEVICE": "mps",
+        "PATH": "/Users/rob/repos/emojifold/.venv/bin:/usr/local/bin:/usr/bin:/bin",
+        "VIRTUAL_ENV": "/Users/rob/repos/emojifold/.venv"
+      },
+      "log_file": "./logs/emoji-manifold-discovery.log",
+      "out_file": "./logs/emoji-manifold-discovery-out.log", 
+      "error_file": "./logs/emoji-manifold-discovery-error.log",
+      "time": true,
+      "autorestart": true,
+      "max_restarts": 10,
+      "min_uptime": "30s",
+      "restart_delay": 5000
+    }
+  ]
+}

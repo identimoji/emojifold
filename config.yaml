@@ -1,0 +1,118 @@
+# EmojiFold Configuration
+# Copy this to .env and customize for your setup
+
+# Default model to use for batch processing
+default_model: "all_minilm"
+
+# Models to test (for comparative analysis)
+models:
+  # SentenceTransformers (auto-download from HuggingFace)
+  all_minilm:
+    name: "all-MiniLM-L6-v2"
+    type: "sentence_transformer"
+    path: "sentence-transformers/all-MiniLM-L6-v2"
+    embedding_dim: 384
+    batch_size: 128
+    device: "mps"  # Use 'cuda' for 4090, 'mps' for M2 Ultra
+    # Model info: ~23MB, very fast, good for batch processing
+    
+  # Alternative: Larger, more accurate model
+  all_mpnet:
+    name: "all-mpnet-base-v2"
+    type: "sentence_transformer"
+    path: "sentence-transformers/all-mpnet-base-v2"
+    embedding_dim: 768
+    batch_size: 64
+    device: "mps"
+    # Model info: ~438MB, slower but more accurate
+    
+  # Ollama models (requires ollama pull <model>)
+  # nomic_embed:
+  #   name: "nomic-embed-text"
+  #   type: "ollama"
+  #   path: "nomic-embed-text"
+  #   embedding_dim: 768
+  #   batch_size: 64
+  #   host: "http://localhost:11434"
+  #   # Model info: ~274MB, requires Ollama running
+    
+  # The Heavy Artillery - M2 Ultra Beast Mode
+  e5_large:
+    name: "e5-large-v2"
+    type: "sentence_transformer"
+    path: "intfloat/e5-large-v2"
+    embedding_dim: 1024
+    batch_size: 32
+    device: "mps"
+    # Model info: ~1.3GB, Microsoft's monster
+    
+  bge_large:
+    name: "BGE-large-en-v1.5"
+    type: "sentence_transformer"
+    path: "BAAI/bge-large-en-v1.5"
+    embedding_dim: 1024
+    batch_size: 32
+    device: "mps"
+    # Model info: ~1.3GB, BAAI's beast
+    
+  instructor_xl:
+    name: "instructor-xl"
+    type: "sentence_transformer"
+    path: "hkunlp/instructor-xl"
+    embedding_dim: 768
+    batch_size: 16
+    device: "mps"
+    # Model info: ~4.9GB, instruction-tuned powerhouse
+    
+  gte_large:
+    name: "gte-large"
+    type: "sentence_transformer"
+    path: "thenlper/gte-large"
+    embedding_dim: 1024
+    batch_size: 32
+    device: "mps"
+    # Model info: ~670MB, efficient large model
+    
+  multilingual_e5:
+    name: "multilingual-e5-large"
+    type: "sentence_transformer"
+    path: "intfloat/multilingual-e5-large"
+    embedding_dim: 1024
+    batch_size: 32
+    device: "mps"
+    # Model info: ~2.2GB, global perspective
+
+# Processing configuration
+processing:
+  max_concurrent: 10
+  progress_interval: 100
+  resume_on_restart: true
+  
+# Storage configuration
+storage:
+  database_path: "~/.emojifold/emojifold_v3.db"
+  results_dir: "~/.emojifold/results"
+  cache_embeddings: true
+  cache_dir: "~/.emojifold/cache"
+
+# Emoji set configuration
+emojis:
+  # Start with a test set, then scale up
+  test_set_size: 50
+  # Full set will be auto-generated from Unicode emoji data
+  include_skin_tones: false
+  include_flags: true
+  min_unicode_version: 12.0
+
+# Analysis configuration  
+analysis:
+  top_oppositions: 100
+  min_distance_threshold: 0.1
+  cluster_analysis: true
+  cross_model_comparison: true
+
+# Logging
+logging:
+  level: "INFO"
+  file: "./logs/emojifold.log"
+  console: true
