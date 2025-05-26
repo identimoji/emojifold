@@ -11,11 +11,15 @@ uv venv
 source .venv/bin/activate
 uv pip install -e .
 
+# Database location: ~/.emojifold/emojifold.db
 # Run small test
 emojifold test --pairs 50
 
 # Run full overnight analysis
 emojifold batch --model all --output results/
+
+# Calculate model centroids
+python calculate_centroids.py --db ~/.emojifold/emojifold.db
 ```
 
 ## 🎯 Project Goals
